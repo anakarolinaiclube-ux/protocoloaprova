@@ -1,410 +1,747 @@
 <!DOCTYPE html>
-<html lang="pt-BR" class="scroll-smooth">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Protocolo de Aprovação | MicroSaaS</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Protocolo de Aprovação - Inteligência em Concursos</title>
     
-    <!-- Fonte Única: Poppins (Vários pesos para hierarquia) -->
+    <!-- Importando Fontes -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: {
-                        sans: ['"Poppins"', 'sans-serif'], // Fonte única conforme solicitado
-                    },
-                    colors: {
-                        dark: {
-                            bg: '#050609',      // Preto quase absoluto
-                            card: '#0F1115',    // Cinza chumbo para cards
-                            border: '#1F2937',  // Bordas sutis
-                            surface: '#18181B'
-                        },
-                        brand: {
-                            green: '#10B981',   // Verde digital vibrante (mas sério)
-                            glow: 'rgba(16, 185, 129, 0.15)',
-                            text: '#E4E4E7',    // Cinza quase branco (leitura suave)
-                            muted: '#A1A1AA'    // Cinza médio
-                        }
-                    },
-                    backgroundImage: {
-                        'grid-pattern': "linear-gradient(to right, #1f2937 1px, transparent 1px), linear-gradient(to bottom, #1f2937 1px, transparent 1px)",
-                        'glow-radial': "radial-gradient(circle at center, var(--tw-gradient-stops))",
-                    },
-                    animation: {
-                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-                    }
-                }
-            }
-        }
-    </script>
+    <!-- Ícones -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 
     <style>
+        /* --- RESET & VARIÁVEIS (Cores do Quiz Anterior) --- */
+        :root {
+            --primary-orange: #ea580c; /* Laranja para ação */
+            --navy-deep: #0f172a; /* Azul autoridade */
+            --blue-accent: #3b82f6;
+            --dark-text: #1e293b;
+            --light-text: #475569;
+            --gold: #fbbf24;
+            --bg-white: #ffffff;
+            --bg-soft-blue: #f0f9ff;
+            --bg-offwhite: #f8fafc;
+            --bg-contrast: #e2e8f0;
+            --green-check: #16a34a;
+            --font-serif: 'Playfair Display', serif;
+            --font-main: 'Poppins', sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            width: 100%;
+            overflow-x: hidden;
+            position: relative;
+        }
+
         body {
-            background-color: #050609;
-            color: #E4E4E7;
-            font-family: 'Poppins', sans-serif;
+            font-family: var(--font-main);
+            color: var(--dark-text);
+            line-height: 1.6;
+            background-color: var(--bg-white);
+            font-weight: 400;
         }
 
-        /* Efeito de Grid Matrix Sutil no Background */
-        .bg-grid {
-            background-size: 40px 40px;
-            mask-image: linear-gradient(to bottom, transparent, 10% black, 90% black, transparent);
-            -webkit-mask-image: linear-gradient(to bottom, transparent, 5%, black, 95%, transparent);
-            opacity: 0.08;
-            pointer-events: none;
-            position: absolute;
-            inset: 0;
-            z-index: 0;
-        }
-
-        /* Glow Effects */
-        .spotlight {
-            background: radial-gradient(800px circle at var(--mouse-x) var(--mouse-y), rgba(255,255,255,0.06), transparent 40%);
-        }
-
-        /* UI Gamification Elements */
-        .xp-bar {
-            background: linear-gradient(90deg, #10B981 0%, #059669 100%);
-            box-shadow: 0 0 10px rgba(16, 185, 129, 0.4);
-        }
+        a { text-decoration: none; color: inherit; }
+        ul { list-style: none; }
+        img { max-width: 100%; height: auto; }
         
-        .stat-card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 30px -10px rgba(16, 185, 129, 0.1);
-            border-color: rgba(16, 185, 129, 0.3);
+        h2, h3, h4, h5, h6, p, span, li, button, .logo {
+            font-family: var(--font-main);
+        }
+
+        /* --- ANIMAÇÃO DE ONDAS --- */
+        @keyframes wave-motion {
+            0% { transform: translateX(0) scaleY(1); }
+            50% { transform: translateX(-20px) scaleY(1.1); }
+            100% { transform: translateX(0) scaleY(1); }
+        }
+
+        /* --- UTILITÁRIOS --- */
+        .container {
+            width: 100%;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            position: relative;
+            z-index: 2;
+        }
+        .text-center { text-align: center; }
+        
+        .btn-cta {
+            background-color: var(--green-check);
+            color: white;
+            width: 100%;
+            padding: 18px;
+            font-size: 1rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            letter-spacing: 0.5px;
+            box-shadow: 0 4px 15px rgba(22, 163, 74, 0.4);
+            font-family: var(--font-main);
+        }
+        .btn-cta:hover { background-color: #15803d; transform: translateY(-2px); }
+
+        /* --- WAVE DIVIDERS --- */
+        .wave-divider {
+            position: absolute;
+            left: -10%;
+            width: 120%;
+            overflow: hidden;
+            line-height: 0;
+            z-index: 1;
+            pointer-events: none;
+        }
+        .wave-divider svg {
+            display: block;
+            width: 100%;
+            height: 70px;
+            transform-origin: bottom center;
+            animation: wave-motion 8s ease-in-out infinite;
+        }
+        .wave-bottom { bottom: -1px; transform: rotate(180deg); }
+        .wave-top { top: -1px; }
+        
+        .fill-soft-blue { fill: var(--bg-soft-blue); }
+        .fill-contrast { fill: var(--bg-contrast); }
+        .fill-white { fill: #ffffff; }
+        .fill-dark { fill: var(--navy-deep); }
+
+        /* --- TOP BAR --- */
+        .top-bar {
+            background-color: var(--primary-orange);
+            color: #fff;
+            text-align: center;
+            padding: 10px;
+            font-size: 0.85rem;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            font-weight: 600;
+        }
+        .timer { font-family: monospace; font-size: 0.95rem; background: rgba(0,0,0,0.1); padding: 2px 6px; border-radius: 4px; }
+
+        /* --- HEADER --- */
+        header {
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            background: rgba(255,255,255,0.98);
+            z-index: 1000;
+            width: 100%;
+        }
+        .nav-links { display: none; gap: 20px; font-size: 0.85rem; text-transform: uppercase; font-weight: 600; color: var(--navy-deep); }
+        .logo { font-size: 1.3rem; color: var(--navy-deep); font-weight: 800; letter-spacing: -0.5px; text-transform: uppercase;}
+        .logo span { color: var(--primary-orange); font-weight: 800; }
+        .header-icons { display: flex; gap: 15px; font-size: 1.1rem; color: var(--navy-deep); }
+
+        /* --- HERO SECTION --- */
+        .product-hero {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 60px;
+            align-items: center;
+            background: radial-gradient(circle at center, #fff 0%, #f1f5f9 100%);
+        }
+        .product-image-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        /* VISUAL DE APP/DASHBOARD */
+        .book-cover {
+            width: 280px;
+            height: 400px;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+            text-align: center;
+            box-shadow: 20px 20px 40px rgba(0,0,0,0.2);
+            padding: 25px;
+            border-radius: 20px; /* Bordas arredondadas estilo App */
+            border: 4px solid #334155;
+            position: relative;
+        }
+        .book-cover::after {
+            content: ''; position: absolute; top: 10px; width: 40%; height: 5px; background: #334155; border-radius: 10px;
+        }
+        .book-cover h2 { 
+            font-family: var(--font-main); 
+            font-size: 1.2rem; 
+            line-height: 1.2; 
+            margin-top: 20px; 
+            color: #fff;
+            text-transform: uppercase;
+        }
+        .dash-visual {
+            margin-top: 20px;
+            width: 100%;
+            height: 150px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+        }
+        .dash-bar { width: 80%; height: 8px; background: #334155; border-radius: 4px; overflow: hidden; }
+        .dash-fill { height: 100%; width: 75%; background: var(--primary-orange); }
+        .app-icon { font-size: 3rem; color: var(--blue-accent); margin-bottom: 10px; }
+        .author { font-size: 0.7rem; letter-spacing: 1px; text-transform: uppercase; margin-top: auto; color: #94a3b8; font-weight: 600; }
+        
+        .product-details h1 { 
+            font-family: var(--font-main); 
+            font-weight: 800;
+            font-size: 2.2rem; 
+            line-height: 1.2; 
+            margin-bottom: 15px; 
+            color: var(--navy-deep); 
+        }
+        .stars { color: var(--gold); margin-bottom: 10px; font-size: 1rem; }
+        
+        .price-container { margin: 20px 0; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+        .current-price { font-size: 2rem; font-weight: 800; color: var(--navy-deep); }
+        .old-price { text-decoration: line-through; color: #94a3b8; font-size: 1.1rem; }
+        .save-badge { background: var(--primary-orange); color: white; padding: 4px 8px; border-radius: 4px; font-size: 0.75rem; font-weight: 700; }
+        
+        .features-check li { margin-bottom: 10px; display: flex; align-items: start; gap: 10px; font-size: 0.95rem; font-weight: 500; }
+        .features-check i { margin-top: 5px; color: var(--green-check); font-size: 1rem; }
+
+        /* --- 1. PAIN SECTION WRAPPER --- */
+        .pain-section-wrapper {
+            position: relative;
+            background-color: var(--bg-soft-blue);
+            padding: 60px 0;
+            margin-bottom: 60px;
+            width: 100%;
+        }
+        .pain-section {
+            text-align: center;
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+        .pain-section h2 { 
+            font-size: 1.8rem; 
+            margin-bottom: 15px; 
+            font-weight: 700;
+            color: var(--navy-deep);
+        }
+        .pain-section p { 
+            color: var(--light-text); 
+            margin-bottom: 15px; 
+            font-size: 1.05rem; 
+        }
+
+        /* --- 2. COMPARISON TABLE --- */
+        .comparison-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: start;
+            margin-bottom: 80px;
+        }
+        .comparison-text h2 { font-size: 2rem; margin-bottom: 20px; font-weight: 700; color: var(--navy-deep); }
+        .comparison-text p { margin-bottom: 20px; color: var(--light-text); font-size: 0.95rem; }
+        
+        .comparison-table {
+            background: #fff;
+            border: 1px solid #cbd5e1;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            width: 100%;
+        }
+        .comp-header {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            background: #f1f5f9;
+            font-weight: 700;
+            border-bottom: 2px solid #e2e8f0;
+        }
+        .comp-header div { padding: 15px; text-align: center; font-size: 0.85rem; }
+        .comp-header .brand-col { color: var(--navy-deep); font-weight: 800; font-size: 0.9rem; text-transform: uppercase; }
+        .comp-row {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            background: #fff;
+            border-bottom: 1px solid #f1f5f9;
+            align-items: center;
+        }
+        .comp-feature {
+            background-color: var(--navy-deep);
+            color: white;
+            padding: 12px 15px;
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            font-weight: 500;
+            line-height: 1.3;
+        }
+        .comp-check, .comp-cross {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1rem;
+            height: 100%;
+            background: #fff;
+            padding: 10px;
+        }
+        .comp-check { color: var(--green-check); }
+        .comp-cross { color: #cbd5e1; }
+
+        /* --- 3. WARNING SECTION --- */
+        .warning-wrapper {
+            background: #fff7ed; /* Fundo laranja bem claro */
+            border-left: 5px solid var(--primary-orange);
+            margin-bottom: 80px;
+            width: 100%;
+        }
+        .warning-section { padding: 40px; }
+        .warning-title {
+            font-size: 1.6rem;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-weight: 700;
+            color: var(--primary-orange);
+        }
+        .warning-icon { font-size: 2rem; }
+        .warning-content ul { list-style: disc; padding-left: 20px; margin: 20px 0; }
+        .warning-content li { margin-bottom: 10px; color: var(--light-text); font-size: 0.95rem; }
+
+        /* --- 4. EXPERIENCE SECTION WRAPPER --- */
+        .experience-wrapper {
+            position: relative;
+            background-color: var(--navy-deep); /* Fundo Escuro para contraste */
+            color: #fff;
+            padding-top: 80px;
+            padding-bottom: 60px;
+            margin-bottom: 60px;
+            width: 100%;
+        }
+        .experience-section {
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 40px;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+        }
+        .exp-left h2 { color: #fff; font-size: 2rem; margin-bottom: 30px; }
+        .exp-list li { display: flex; gap: 15px; margin-bottom: 25px; align-items: flex-start; }
+        .exp-icon { font-size: 1.2rem; min-width: 25px; margin-top: 2px; color: var(--primary-orange); }
+        .exp-text strong { display: block; color: #fff; font-weight: 600; margin-bottom: 5px; }
+        .exp-text { font-size: 0.95rem; color: #cbd5e1; }
+
+        .stats-container { display: flex; flex-direction: column; gap: 20px; }
+        .stat-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            background: rgba(255,255,255,0.05);
+            padding: 20px;
+            border-radius: 10px;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        .circle-chart {
+            width: 60px; height: 60px;
+            border-radius: 50%;
+            display: flex; justify-content: center; align-items: center;
+            font-weight: 700; color: var(--navy-deep); font-size: 0.9rem;
+            flex-shrink: 0; position: relative;
+        }
+        /* Ajuste das cores dos gráficos */
+        .c-91 { background: conic-gradient(var(--primary-orange) 91%, #cbd5e1 0); }
+        .c-89 { background: conic-gradient(var(--primary-orange) 89%, #cbd5e1 0); }
+        .c-95 { background: conic-gradient(var(--primary-orange) 95%, #cbd5e1 0); }
+        .circle-inner {
+            width: 48px; height: 48px; background: #fff; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center; position: absolute;
+        }
+        .stat-desc { font-size: 0.85rem; color: #cbd5e1; line-height: 1.4; }
+
+        /* --- 5. BEFORE & AFTER --- */
+        .game-section {
+            margin-bottom: 80px;
+            display: grid;
+            grid-template-columns: 1fr 1.4fr;
+            gap: 40px;
+            align-items: center;
+        }
+        .game-text h2 { font-size: 2.2rem; margin-bottom: 15px; font-weight: 700; color: var(--navy-deep); }
+        .game-text p { color: var(--light-text); font-size: 0.95rem; }
+        
+        .ba-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        .ba-col { padding: 30px 20px; }
+        .ba-before { background-color: #f1f5f9; } 
+        .ba-after { background-color: #dcfce7; } /* Verde claro */
+        .ba-header {
+            background-color: var(--navy-deep);
+            color: white;
+            padding: 5px 10px; text-transform: uppercase; font-weight: 700; font-size: 0.7rem;
+            display: inline-block; margin-bottom: 20px; border-radius: 3px;
+        }
+        .ba-list div {
+            margin-bottom: 15px; display: flex; justify-content: space-between;
+            align-items: center; font-size: 0.8rem; line-height: 1.4; font-weight: 500;
+        }
+        .ba-before .ba-list div { text-align: right; flex-direction: row; } 
+        .icon-cross { color: #ef4444; font-size: 1rem; margin-left: 8px; }
+        .icon-check { color: #16a34a; font-size: 1rem; margin-left: 8px; }
+
+        /* --- 6. GUARANTEE SECTION --- */
+        .guarantee-section {
+            text-align: center;
+            padding: 50px 20px;
+            background: #fff;
+            max-width: 800px;
+            margin: 0 auto 60px auto;
+            border: 2px dashed #cbd5e1;
+            border-radius: 10px;
+        }
+        .guarantee-section h2 { font-size: 1.6rem; margin-bottom: 20px; font-weight: 700; color: var(--navy-deep); }
+        .guarantee-section p { margin-bottom: 20px; color: var(--light-text); font-size: 0.95rem; }
+
+        /* --- TESTIMONIALS --- */
+        .testimonials-wrapper { background-color: #fff; padding-bottom: 80px; width: 100%; }
+        .reviews-grid {
+            display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-bottom: 50px;
+        }
+        .review-card {
+            background: #f8fafc; padding: 25px 20px; border-radius: 12px; text-align: center; position: relative;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.03); border: 1px solid #e2e8f0;
+        }
+        .quote-icon { color: var(--navy-deep); font-size: 1.8rem; position: absolute; top: 15px; right: 15px; opacity: 0.1; }
+        .review-title { font-weight: 700; font-size: 0.95rem; margin: 15px 0; color: var(--navy-deep); }
+        .review-body { font-size: 0.85rem; color: var(--light-text); margin-bottom: 20px; font-style: italic; }
+        .review-author { font-size: 0.75rem; text-transform: uppercase; color: #64748b; font-weight: 700; letter-spacing: 1px; }
+
+        /* --- FOOTER --- */
+        .footer-wrapper { position: relative; margin-top: 50px; width: 100%; }
+        .footer-wave svg {
+            animation: wave-motion 8s ease-in-out infinite reverse;
+        }
+        footer { 
+            background: var(--navy-deep); color: #fff; padding: 60px 20px 40px 20px; 
+            text-align: center; font-size: 0.8rem; position: relative; z-index: 2;
+        }
+
+        /* --- RESPONSIVIDADE MOBILE --- */
+        @media (min-width: 769px) { .nav-links { display: flex; } }
+
+        @media (max-width: 768px) {
+            .container { padding: 30px 20px; }
+            
+            .product-details h1 { font-size: 1.8rem; line-height: 1.3; } 
+            h2 { font-size: 1.5rem !important; line-height: 1.3; }
+            
+            .product-hero, .comparison-section, .experience-section, .game-section, .reviews-grid {
+                grid-template-columns: 1fr; 
+                gap: 35px;
+            }
+            
+            .product-hero { text-align: center; }
+            .product-image-wrapper { padding: 0; }
+            .book-cover { width: 220px; height: 350px; margin: 0 auto; }
+            .price-container { justify-content: center; }
+            .features-check { display: inline-block; text-align: left; }
+            
+            .comparison-table { 
+                overflow-x: auto; 
+                display: block; 
+                width: 100%; 
+                -webkit-overflow-scrolling: touch;
+            }
+            .comp-header, .comp-row { min-width: 500px; } 
+            
+            .warning-section { padding: 25px 15px; }
+            .warning-title { font-size: 1.4rem; justify-content: center; text-align: center; }
+            
+            .ba-container { grid-template-columns: 1fr; }
+            
+            .reviews-grid { gap: 15px; }
+            
+            p, li { font-size: 0.9rem !important; }
+        }
+
+        @media (max-width: 480px) {
+            .product-details h1 { font-size: 1.6rem; }
+            h2 { font-size: 1.35rem !important; }
+            .top-bar { font-size: 0.75rem; }
+            .btn-cta { font-size: 0.9rem; padding: 14px; }
+            .current-price { font-size: 1.8rem; }
         }
     </style>
 </head>
-<body class="relative overflow-x-hidden antialiased">
+<body>
 
-    <!-- Background Base Layer -->
-    <div class="fixed inset-0 bg-dark-bg z-[-2]"></div>
-    <div class="bg-grid bg-grid-pattern z-[-1]"></div>
-    
-    <!-- Glow Decorativo Topo -->
-    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[400px] bg-brand-green opacity-[0.08] blur-[120px] rounded-full z-0 pointer-events-none"></div>
+    <div class="top-bar">
+        <span>OFERTA RELÂMPAGO ⚡ EBOOK + APP COM DIAGNÓSTICO INCLUSO</span>
+        <div class="timer">00 : 45 : 12</div>
+    </div>
 
-    <!-- Navbar -->
-    <nav class="w-full py-6 px-6 md:px-12 flex justify-between items-center max-w-7xl mx-auto relative z-20">
-        <div class="font-bold text-xl tracking-tighter text-white flex items-center gap-2">
-            <div class="w-2 h-2 bg-brand-green rounded-full animate-pulse"></div>
-            NEXUS<span class="text-brand-muted font-light">CORE</span>
+    <header>
+        <div class="logo">PROTOCOLO<span>APROVAÇÃO</span></div>
+        <div class="nav-links">
+            <a href="#">Método</a><a href="#">O App</a><a href="#">Depoimentos</a><a href="#">Acesso</a>
         </div>
-        <a href="#cta" class="hidden md:flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-brand-muted hover:text-white transition-colors border border-dark-border px-4 py-2 rounded bg-dark-card/50 backdrop-blur-sm">
-            Login
-            <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
-        </a>
-    </nav>
+        <div class="header-icons"><i class="fas fa-lock"></i></div>
+    </header>
 
-    <!-- HERO SECTION (Estilo David Deutsch: O Segredo / O Novo Mecanismo) -->
-    <section class="relative pt-16 pb-24 md:pt-28 md:pb-32 px-6 overflow-hidden max-w-7xl mx-auto">
+    <div class="container">
+        <!-- Hero -->
+        <section class="product-hero">
+            <div class="product-image-wrapper">
+                <!-- Visual Mockup do APP/System -->
+                <div class="book-cover">
+                    <div class="author">Inteligência Artificial</div>
+                    <div class="dash-visual">
+                        <i class="fas fa-chart-pie app-icon"></i>
+                        <div class="dash-bar"><div class="dash-fill"></div></div>
+                        <div style="font-size: 0.6rem; color: #cbd5e1;">Analisando Banca...</div>
+                    </div>
+                    <h2>SYSTEM<br><span style="color:var(--primary-orange); font-weight: 800;">PRO</span><br>V. 2.0</h2>
+                </div>
+            </div>
+
+            <div class="product-details">
+                <h1>Pare de estudar cego. O Protocolo cria sua estratégia perfeita.</h1>
+                
+                <div class="rating text-center-mobile">
+                    <span class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></span>
+                    <span style="font-size: 0.85rem; color: #64748b; font-weight: 600;">(12.400+ Estudantes Aprovados)</span>
+                </div>
+                
+                <div class="price-container">
+                    <span class="current-price">R$ 97,90</span>
+                    <span class="old-price">R$ 297,00</span>
+                    <span class="save-badge">-67% OFF</span>
+                </div>
+                
+                <ul class="features-check">
+                    <li><i class="fas fa-check-circle"></i> <strong>EBOOK + APP:</strong> Método completo de aceleração.</li>
+                    <li><i class="fas fa-check-circle"></i> Análise de Banca Baseada em Dados (IA).</li>
+                    <li><i class="fas fa-check-circle"></i> Cronograma adaptado ao seu tempo real disponível.</li>
+                </ul>
+                
+                <a href="https://SEU-LINK-DE-CHECKOUT.com" class="btn-cta" style="display: block; text-align: center; text-decoration: none;">QUERO MEU PLANO ESTRATÉGICO <i class="fas fa-arrow-right"></i></a>
+            </div>
+        </section>
+    </div>
+
+    <!-- Pain Section -->
+    <div class="pain-section-wrapper">
+        <div class="wave-divider wave-top">
+            <svg viewBox="0 0 1200 120" preserveAspectRatio="none">
+                <path d="M985.66,92.83C906.67,72,823.78,31,743.84,14.19c-82.26-17.34-168.06-16.33-250.45.39-57.84,11.73-114,31.07-172,41.86A600.21,600.21,0,0,1,0,27.35V120H1200V95.8C1132.19,118.92,1055.71,111.31,985.66,92.83Z" class="fill-soft-blue"></path>
+            </svg>
+        </div>
+
+        <div class="container pain-section">
+            <h2>Você é um "Colecionador de PDFs" profissional?</h2>
+            <p>Passar em concurso não é sobre quem lê mais páginas, é sobre quem acerta mais questões. Você sente que estuda horas, mas na hora do simulado parece que <strong>nada ficou gravado?</strong></p>
+            <p>A maioria dos candidatos falha não por falta de esforço, mas por <strong>excesso de conteúdo inútil</strong>. O Protocolo elimina o ruído e foca apenas no que a banca cobra.</p>
+        </div>
         
-        <div class="grid md:grid-cols-2 gap-16 items-center relative z-10">
+        <div class="wave-divider wave-bottom">
+            <svg viewBox="0 0 1200 120" preserveAspectRatio="none">
+                <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" class="fill-soft-blue"></path>
+            </svg>
+        </div>
+    </div>
+
+    <div class="container">
+        <section class="comparison-section">
+            <div class="comparison-text">
+                <h2>Por que Cursinhos Tradicionais Te Fazem Perder Tempo</h2>
+                <p>Eles vendem horas-aula. Nós vendemos estratégia. Enquanto eles te dão 500 aulas de Direito Constitucional, nosso App diz: <em>"A sua banca só cobrou Art. 5º nos últimos 3 anos. Foque nisso."</em></p>
+                <p>O <strong>Protocolo de Aprovação</strong> usa inteligência de dados para cruzar seu nível atual com o perfil da prova.</p>
+            </div>
             
-            <!-- Copy -->
-            <div class="text-left space-y-8">
-                <div class="inline-flex items-center gap-2 px-3 py-1 rounded border border-brand-green/30 bg-brand-green/5 text-brand-green text-[10px] uppercase font-bold tracking-[0.2em]">
-                    <span class="w-1.5 h-1.5 rounded-full bg-brand-green"></span>
-                    Nova Tecnologia de Aprovação
+            <div class="comparison-table">
+                <div class="comp-header">
+                    <div></div><div class="brand-col">Protocolo<br>Aprovação</div><div style="color:#94a3b8;">Cursinho Comum</div>
                 </div>
-                
-                <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold leading-[1.1] text-white">
-                    Porque estudar muito <br>
-                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-green to-emerald-600">está reprovando você.</span>
-                </h1>
-                
-                <p class="text-brand-muted text-lg font-light leading-relaxed max-w-xl">
-                    Há uma "falha invisível" na forma como cursinhos entregam conteúdo. Eles vendem volume. Nós entregamos <strong>precisão cirúrgica</strong> baseada em dados. 
-                    <br><br>
-                    Pare de tentar memorizar o oceano. Descubra o algoritmo que separa o ruído do que realmente cai na prova.
-                </p>
-                
-                <div class="flex flex-col sm:flex-row gap-4 pt-4">
-                    <a href="#cta" class="group relative px-8 py-4 bg-white text-dark-bg font-bold rounded hover:bg-brand-green transition-all duration-300 flex items-center justify-center gap-3 overflow-hidden">
-                        <span class="relative z-10">Gerar meu Diagnóstico Tático</span>
-                        <svg class="w-4 h-4 relative z-10 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
-                        <div class="absolute inset-0 bg-brand-green transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300"></div>
-                    </a>
+                <div class="comp-row">
+                    <div class="comp-feature">Análise Estatística da Banca</div><div class="comp-check"><i class="fas fa-check"></i></div><div class="comp-cross"><i class="fas fa-times"></i></div>
                 </div>
-                
-                <p class="text-xs text-brand-muted opacity-60">
-                    * Sistema calibrado para as principais bancas de 2025.
-                </p>
-            </div>
-
-            <!-- Visual: Gamified Dashboard (Abstract) -->
-            <div class="relative">
-                <div class="absolute -inset-1 bg-gradient-to-r from-brand-green to-transparent opacity-20 blur-lg rounded-xl"></div>
-                <div class="relative bg-dark-card border border-dark-border rounded-xl p-6 shadow-2xl backdrop-blur-sm">
-                    
-                    <!-- Header UI -->
-                    <div class="flex justify-between items-center mb-8 border-b border-dark-border pb-4">
-                        <div class="flex gap-2">
-                            <div class="w-3 h-3 rounded-full bg-red-500/20"></div>
-                            <div class="w-3 h-3 rounded-full bg-yellow-500/20"></div>
-                            <div class="w-3 h-3 rounded-full bg-green-500/20"></div>
-                        </div>
-                        <div class="text-[10px] font-mono text-brand-green uppercase tracking-widest">Analysis_Mode: Active</div>
-                    </div>
-
-                    <!-- Main Stats -->
-                    <div class="space-y-6">
-                        <!-- Stat 1 -->
-                        <div class="flex items-center justify-between">
-                            <div>
-                                <p class="text-xs text-brand-muted uppercase tracking-wider mb-1">Probabilidade de Aprovação</p>
-                                <div class="flex items-end gap-2">
-                                    <span class="text-3xl font-bold text-white">87%</span>
-                                    <span class="text-xs text-brand-green mb-1">+24% vs semana anterior</span>
-                                </div>
-                            </div>
-                            <div class="w-12 h-12 rounded bg-brand-green/10 flex items-center justify-center border border-brand-green/20">
-                                <svg class="w-6 h-6 text-brand-green" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg>
-                            </div>
-                        </div>
-
-                        <!-- Progress Bar (Gamification) -->
-                        <div>
-                            <div class="flex justify-between text-xs mb-2">
-                                <span class="text-white font-medium">Domínio do Edital (XP)</span>
-                                <span class="text-brand-green">Nível 4 - Estrategista</span>
-                            </div>
-                            <div class="w-full h-2 bg-dark-bg rounded-full overflow-hidden border border-dark-border">
-                                <div class="h-full xp-bar w-[72%] rounded-full relative">
-                                    <div class="absolute inset-0 bg-white/20 animate-[shimmer_2s_infinite]"></div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Grid de Matérias -->
-                        <div class="grid grid-cols-2 gap-3 mt-4">
-                            <div class="p-3 bg-dark-bg rounded border border-dark-border flex items-center gap-3">
-                                <div class="w-2 h-2 rounded-full bg-brand-green"></div>
-                                <div>
-                                    <div class="text-xs text-brand-muted">Constitucional</div>
-                                    <div class="text-sm font-bold text-white">Alta Prioridade</div>
-                                </div>
-                            </div>
-                            <div class="p-3 bg-dark-bg rounded border border-dark-border flex items-center gap-3 opacity-50">
-                                <div class="w-2 h-2 rounded-full bg-gray-600"></div>
-                                <div>
-                                    <div class="text-xs text-brand-muted">Informática</div>
-                                    <div class="text-sm font-bold text-gray-400">Pular Tópico</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
+                <div class="comp-row">
+                    <div class="comp-feature">Cronograma Inteligente (App)</div><div class="comp-check"><i class="fas fa-check"></i></div><div class="comp-cross"><i class="fas fa-times"></i></div>
+                </div>
+                <div class="comp-row">
+                    <div class="comp-feature">Foco em Engenharia Reversa</div><div class="comp-check"><i class="fas fa-check"></i></div><div class="comp-cross"><i class="fas fa-times"></i></div>
+                </div>
+                <div class="comp-row">
+                    <div class="comp-feature">Adaptação ao seu Tempo Livre</div><div class="comp-check"><i class="fas fa-check"></i></div><div class="comp-cross"><i class="fas fa-times"></i></div>
                 </div>
             </div>
+        </section>
 
+        <div class="warning-wrapper">
+            <section class="warning-section">
+                <div class="warning-title">
+                    <span class="warning-icon"><i class="fas fa-exclamation-triangle"></i></span>Atenção: Método Contra-Intuitivo
+                </div>
+                <div class="warning-content">
+                    <strong>Este protocolo NÃO é para quem busca "diquinhas" de estudo.</strong>
+                    <p style="margin-top:10px;">Você vai sentir medo, porque vai estudar MENOS conteúdo bruto do que seus concorrentes, mas com MUITO mais profundidade estratégica.</p>
+                    <ul>
+                        <li>Você vai ignorar partes do edital que têm 0% de chance de cair.</li>
+                        <li>Você vai parar de assistir vídeo-aula passivamente e começar a resolução ativa.</li>
+                    </ul>
+                    <p>Se você tem coragem de confiar nos dados e não na manada, isso é para você.</p>
+                </div>
+            </section>
         </div>
-    </section>
+    </div>
 
-    <!-- SECTION 2: A QUEBRA DE PADRÃO (The Truth) -->
-    <section class="py-20 px-6 bg-dark-surface border-y border-dark-border">
-        <div class="max-w-3xl mx-auto text-center">
-            <h2 class="text-2xl md:text-3xl font-semibold mb-6 text-white leading-snug">
-                “Se estudar 12 horas por dia garantisse vaga,<br>
-                <span class="text-brand-green">todo bibliotecário seria juiz.”</span>
-            </h2>
-            <p class="text-brand-muted text-lg">
-                O modelo tradicional de cursinhos lucra com a sua insegurança. Eles te dão <strong>tudo</strong> para você achar que tem o suficiente. Mas em concursos de alto nível, <span class="text-white font-medium">informação sem filtro é apenas distração.</span>
-            </p>
-        </div>
-    </section>
-
-    <!-- SECTION 3: IDENTIFICAÇÃO (Gamified Pain Points) -->
-    <section class="py-24 px-6 max-w-6xl mx-auto">
-        <div class="text-center mb-16">
-            <span class="text-brand-green font-bold text-xs tracking-[0.3em] uppercase opacity-80">Diagnóstico de Erro</span>
-            <h3 class="text-3xl md:text-4xl font-bold mt-2 text-white">Você está jogando o jogo errado?</h3>
+    <div class="experience-wrapper">
+        <div class="wave-divider wave-top">
+             <svg viewBox="0 0 1200 120" preserveAspectRatio="none">
+                <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" class="fill-white"></path>
+            </svg>
         </div>
 
-        <div class="grid md:grid-cols-3 gap-6">
-            <!-- Card 1 -->
-            <div class="stat-card p-8 bg-dark-card border border-dark-border rounded hover:border-red-500/50 transition-all duration-300 group">
-                <div class="flex justify-between items-start mb-6">
-                    <div class="p-3 bg-red-500/10 rounded group-hover:bg-red-500/20 transition-colors">
-                        <svg class="w-6 h-6 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                    </div>
-                    <span class="text-xs font-mono text-red-500 uppercase">Warning</span>
-                </div>
-                <h4 class="text-lg font-bold text-white mb-3">Grinding Sem XP</h4>
-                <p class="text-sm text-brand-muted leading-relaxed">
-                    Você estuda horas a fio (grinding), mas sua nota nos simulados (XP) estagnou. Você sente que corre numa esteira.
-                </p>
-            </div>
-
-            <!-- Card 2 -->
-            <div class="stat-card p-8 bg-dark-card border border-dark-border rounded hover:border-red-500/50 transition-all duration-300 group">
-                <div class="flex justify-between items-start mb-6">
-                    <div class="p-3 bg-red-500/10 rounded group-hover:bg-red-500/20 transition-colors">
-                        <svg class="w-6 h-6 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.384-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"></path></svg>
-                    </div>
-                    <span class="text-xs font-mono text-red-500 uppercase">Warning</span>
-                </div>
-                <h4 class="text-lg font-bold text-white mb-3">Overload de Inventário</h4>
-                <p class="text-sm text-brand-muted leading-relaxed">
-                    HD cheio de PDFs, livros não lidos e abas abertas. O excesso de recursos está paralisando sua capacidade de decisão.
-                </p>
-            </div>
-
-            <!-- Card 3 -->
-            <div class="stat-card p-8 bg-dark-card border border-dark-border rounded hover:border-red-500/50 transition-all duration-300 group">
-                <div class="flex justify-between items-start mb-6">
-                    <div class="p-3 bg-red-500/10 rounded group-hover:bg-red-500/20 transition-colors">
-                        <svg class="w-6 h-6 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21"></path></svg>
-                    </div>
-                    <span class="text-xs font-mono text-red-500 uppercase">Warning</span>
-                </div>
-                <h4 class="text-lg font-bold text-white mb-3">Mapa Incompleto</h4>
-                <p class="text-sm text-brand-muted leading-relaxed">
-                    Você não sabe quais matérias têm peso real. Você gasta mana (energia mental) em tópicos que a banca ignora há 5 anos.
-                </p>
-            </div>
-        </div>
-    </section>
-
-    <!-- SECTION 4: A SOLUÇÃO (The New Mechanism) -->
-    <section class="py-20 px-6 relative overflow-hidden">
-        <!-- Decoration -->
-        <div class="absolute right-0 top-1/2 -translate-y-1/2 w-1/2 h-full bg-gradient-to-l from-brand-green/5 to-transparent z-0"></div>
-
-        <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-16 relative z-10">
-            <div class="md:w-1/2">
-                <span class="text-brand-green font-bold text-xs tracking-widest uppercase mb-4 block">Engine V2.0</span>
-                <h3 class="text-3xl md:text-5xl font-bold mb-6 text-white">
-                    Não é um curso.<br>
-                    É um <span class="text-brand-green">Estrategista Digital</span>.
-                </h3>
-                <p class="text-lg text-brand-muted mb-8 font-light leading-relaxed">
-                    Imagine que você pudesse hackear o edital. Nossa engine analisa 10 anos de provas da sua banca e cria um caminho otimizado.
-                    <br><br>
-                    Nós transformamos incerteza em <strong>decisões binárias</strong>: Estude isso hoje. Ignore aquilo. Revise isso agora.
-                </p>
-                <ul class="space-y-4">
-                    <li class="flex items-center gap-3 text-white font-medium">
-                        <svg class="w-5 h-5 text-brand-green" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                        Análise Preditiva de Conteúdo
-                    </li>
-                    <li class="flex items-center gap-3 text-white font-medium">
-                        <svg class="w-5 h-5 text-brand-green" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
-                        Otimização de Tempo Real (RTO)
-                    </li>
+        <div class="container experience-section">
+            <div class="exp-left">
+                <h2>O Que o App Entrega Para Você</h2>
+                <ul class="exp-list">
+                    <li><span class="exp-icon"><i class="fas fa-bullseye"></i></span><div class="exp-text"><strong>Raio-X do Edital:</strong> Identificação exata dos tópicos quentes e dos tópicos irrelevantes.</div></li>
+                    <li><span class="exp-icon"><i class="fas fa-brain"></i></span><div class="exp-text"><strong>Retenção Acelerada:</strong> Técnicas de revisão espaçada automática. O App te avisa quando revisar.</div></li>
+                    <li><span class="exp-icon"><i class="fas fa-hourglass-half"></i></span><div class="exp-text"><strong>Gestão de Tempo Real:</strong> Informe quantas horas você tem e o sistema cria a rota perfeita.</div></li>
+                    <li><span class="exp-icon"><i class="fas fa-chart-line"></i></span><div class="exp-text"><strong>Métricas de Evolução:</strong> Pare de achar. Saiba exatamente sua % de acerto por matéria.</div></li>
                 </ul>
             </div>
-            
-            <div class="md:w-1/2 relative">
-                <!-- Abstract Code/Data Visual -->
-                <div class="bg-dark-card border border-dark-border p-6 rounded-lg font-mono text-xs leading-loose text-brand-muted shadow-2xl relative overflow-hidden group">
-                    <div class="absolute inset-0 bg-brand-green/5 group-hover:bg-brand-green/10 transition-colors"></div>
-                    <div class="text-brand-green mb-2">// INICIANDO PROTOCOLO DE ANÁLISE</div>
-                    <div class="pl-4 border-l border-brand-green/30">
-                        <p>> User: Concurso_Auditor</p>
-                        <p>> Banca: FGV</p>
-                        <p>> Scanning last 50 exams... <span class="text-white">Done.</span></p>
-                        <p>> Pattern Detected: "Direito Adm" weight increased by 15%.</p>
-                        <p>> Action: Reallocating study hours...</p>
-                        <p class="animate-pulse text-white mt-2">> GENERATING OPTIMAL PATH [██████████] 100%</p>
-                    </div>
+            <div class="stats-container">
+                <div class="stat-item">
+                    <div class="circle-chart c-91"><div class="circle-inner">3x</div></div>
+                    <div class="stat-desc">mais velocidade na cobertura do edital relevante</div>
+                </div>
+                <div class="stat-item">
+                    <div class="circle-chart c-89"><div class="circle-inner">89%</div></div>
+                    <div class="stat-desc">de aumento na taxa de acertos em simulados na 1ª semana</div>
+                </div>
+                <div class="stat-item">
+                    <div class="circle-chart c-95"><div class="circle-inner">95%</div></div>
+                    <div class="stat-desc">dos alunos dizem sentir "controle total" sobre a prova</div>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
 
-    <!-- SECTION 5: ENTREGÁVEIS (Benefit-First) -->
-    <section class="py-24 px-6 bg-dark-surface/50">
-        <div class="max-w-5xl mx-auto">
-            <h2 class="text-3xl font-bold text-center mb-16 text-white">Seu Arsenal Tático</h2>
-            
-            <div class="grid md:grid-cols-2 gap-8">
-                <!-- Item 1 -->
-                <div class="flex gap-4 p-6 rounded bg-dark-bg border border-dark-border hover:border-brand-green/50 transition-colors group">
-                    <div class="w-10 h-10 rounded bg-brand-green/10 flex items-center justify-center flex-shrink-0 group-hover:bg-brand-green group-hover:text-dark-bg transition-all">
-                        <svg class="w-5 h-5 text-brand-green group-hover:text-dark-bg" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>
-                    </div>
-                    <div>
-                        <h4 class="text-white font-bold text-lg">Heatmaps de Relevância</h4>
-                        <p class="text-sm text-brand-muted mt-2">Saiba exatamente onde você ganha ou perde a prova. Não é sobre estudar tudo, é sobre não errar o que vale ponto.</p>
+    <div class="container">
+        <section class="game-section">
+            <div class="game-text">
+                <h2>Inteligência vence força bruta. Sempre.</h2>
+                <p>Veja a diferença entre um candidato comum e um estrategista do Protocolo.</p>
+            </div>
+            <div class="ba-container">
+                <div class="ba-col ba-before">
+                    <div class="text-center"><span class="ba-header">Candidato Comum</span></div>
+                    <div class="ba-list">
+                        <div>Estuda o edital na ordem linear <i class="fas fa-times-circle icon-cross"></i></div>
+                        <div>Assiste aulas na velocidade 1x <i class="fas fa-times-circle icon-cross"></i></div>
+                        <div>Faz questões aleatórias sem filtro <i class="fas fa-times-circle icon-cross"></i></div>
+                        <div>Ansioso e sem direção clara <i class="fas fa-times-circle icon-cross"></i></div>
                     </div>
                 </div>
-
-                <!-- Item 2 -->
-                <div class="flex gap-4 p-6 rounded bg-dark-bg border border-dark-border hover:border-brand-green/50 transition-colors group">
-                    <div class="w-10 h-10 rounded bg-brand-green/10 flex items-center justify-center flex-shrink-0 group-hover:bg-brand-green group-hover:text-dark-bg transition-all">
-                        <svg class="w-5 h-5 text-brand-green group-hover:text-dark-bg" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                    </div>
-                    <div>
-                        <h4 class="text-white font-bold text-lg">Cronograma Dinâmico</h4>
-                        <p class="text-sm text-brand-muted mt-2">O sistema recalcula sua rota semanalmente. Falhou em Português? O algoritmo ajusta a próxima semana automaticamente.</p>
-                    </div>
-                </div>
-
-                <!-- Item 3 -->
-                <div class="flex gap-4 p-6 rounded bg-dark-bg border border-dark-border hover:border-brand-green/50 transition-colors group">
-                    <div class="w-10 h-10 rounded bg-brand-green/10 flex items-center justify-center flex-shrink-0 group-hover:bg-brand-green group-hover:text-dark-bg transition-all">
-                        <svg class="w-5 h-5 text-brand-green group-hover:text-dark-bg" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path></svg>
-                    </div>
-                    <div>
-                        <h4 class="text-white font-bold text-lg">Daily Quests (Checklist)</h4>
-                        <p class="text-sm text-brand-muted mt-2">Metas diárias gamificadas. A dopamina de completar a missão substitui a ansiedade do atraso.</p>
-                    </div>
-                </div>
-
-                <!-- Item 4 -->
-                <div class="flex gap-4 p-6 rounded bg-dark-bg border border-dark-border hover:border-brand-green/50 transition-colors group">
-                    <div class="w-10 h-10 rounded bg-brand-green/10 flex items-center justify-center flex-shrink-0 group-hover:bg-brand-green group-hover:text-dark-bg transition-all">
-                        <svg class="w-5 h-5 text-brand-green group-hover:text-dark-bg" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.384-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"></path></svg>
-                    </div>
-                    <div>
-                        <h4 class="text-white font-bold text-lg">Simulador de Aprovação</h4>
-                        <p class="text-sm text-brand-muted mt-2">Matemática pura. "Se eu subir 10% em Raciocínio Lógico, passo de 75 para 82 pontos".</p>
+                <div class="ba-col ba-after">
+                    <div class="text-center"><span class="ba-header">Aluno do Protocolo</span></div>
+                    <div class="ba-list">
+                        <div>Foca 80% do tempo em 20% do edital <i class="fas fa-check-circle icon-check"></i></div>
+                        <div>Revisão ativa baseada em erros <i class="fas fa-check-circle icon-check"></i></div>
+                        <div>Conhece as "pegadinhas" da banca <i class="fas fa-check-circle icon-check"></i></div>
+                        <div>Vai para a prova confiante <i class="fas fa-check-circle icon-check"></i></div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- SECTION 6: CTA FINAL (Fear of Missing Out / Logical Choice) -->
-    <section id="cta" class="py-24 px-6 relative overflow-hidden">
-        <!-- Glow Central -->
-        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[500px] bg-brand-green opacity-[0.03] blur-[100px] rounded-full z-0 pointer-events-none"></div>
+        <section class="guarantee-section">
+            <h2>Garantia de 7 Dias Incondicional.</h2>
+            <p>Acesse o Ebook, configure o App e gere seu primeiro plano estratégico.</p>
+            <p>Se você não sentir que sua organização melhorou absurdamente no primeiro dia, nós devolvemos 100% do seu investimento. Sem perguntas.</p>
+        </section>
 
-        <div class="max-w-4xl mx-auto text-center relative z-10">
-            <h2 class="text-4xl md:text-5xl font-bold mb-8 text-white">
-                Assuma o controle.<br>Pare de torcer, comece a calcular.
-            </h2>
-            <p class="text-lg text-brand-muted mb-10 max-w-2xl mx-auto">
-                O custo de estudar errado não é apenas financeiro. É mais um ano da sua vida adiado. 
-                <span class="text-white">A estratégia certa custa menos que uma inscrição de prova.</span>
-            </p>
-            
-            <div class="flex flex-col items-center gap-6">
-                <button class="px-12 py-5 bg-brand-green text-dark-bg text-xl font-bold rounded hover:bg-white transition-all duration-300 w-full md:w-auto shadow-[0_0_30px_rgba(16,185,129,0.3)] hover:shadow-[0_0_50px_rgba(16,185,129,0.5)] transform hover:-translate-y-1">
-                    Ativar Modo Estratégico Agora
-                </button>
-                <div class="flex items-center gap-2 text-sm text-brand-muted opacity-70">
-                    <svg class="w-4 h-4 text-brand-green" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
-                    Acesso imediato ao painel de controle
+        <div class="testimonials-wrapper">
+            <div class="text-center" style="margin-bottom: 40px;">
+                <h2 style="font-size: 2rem; color: var(--navy-deep);">Quem aplicou, aprovou.</h2>
+            </div>
+            <div class="reviews-grid">
+                <div class="review-card">
+                    <i class="fas fa-quote-right quote-icon"></i>
+                    <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                    <div class="review-title">3 anos falhando, passei em 3 meses.</div>
+                    <div class="review-body">"Eu estudava errado. O App me mostrou que eu gastava tempo com matéria que a FGV não cobra. Corrigi a rota e a nomeação veio."</div>
+                    <div class="review-author">Lucas M. - Aprovado TJ</div>
+                </div>
+                <div class="review-card">
+                    <i class="fas fa-quote-right quote-icon"></i>
+                    <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                    <div class="review-title">Funciona para quem trabalha.</div>
+                    <div class="review-body">"Tenho só 2 horas por dia. O Protocolo montou um ciclo exato para esse tempo. Sinto que rendo mais que gente que estuda o dia todo."</div>
+                    <div class="review-author">Fernanda S. - Aprovada INSS</div>
+                </div>
+                <div class="review-card">
+                    <i class="fas fa-quote-right quote-icon"></i>
+                    <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                    <div class="review-title">A análise de banca é surreal.</div>
+                    <div class="review-body">"Parece que eu tinha o gabarito antes da prova. O padrão se repete e o App mapeou tudo. Fui pra prova rindo das questões."</div>
+                    <div class="review-author">Roberto J. - Aprovado Polícia Civil</div>
                 </div>
             </div>
+            <div class="text-center">
+                <!-- BOTÃO CTA FINAL -->
+                <a href="https://SEU-LINK-DE-CHECKOUT.com" class="btn-cta" style="max-width: 500px; display: block; margin: 0 auto; text-align: center; text-decoration: none;">QUERO ACESSAR O PROTOCOLO AGORA</a>
+            </div>
         </div>
-    </section>
+    </div>
 
-    <footer class="py-10 bg-dark-bg border-t border-dark-border text-center">
-        <div class="text-brand-muted text-xs tracking-wider opacity-50">
-            &copy; 2025 NEXUS CORE. INTELIGÊNCIA ESTRATÉGICA PARA CONCURSOS.
+    <div class="footer-wrapper">
+        <div class="footer-wave">
+            <svg viewBox="0 0 1200 120" preserveAspectRatio="none" style="width: 100%; height: 70px; display: block;">
+                <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" class="fill-dark" transform="rotate(180, 600, 60)"></path>
+            </svg>
         </div>
-    </footer>
+        <footer>
+            <p>&copy; 2024 Protocolo de Aprovação. Todos os direitos reservados.</p>
+            <p style="margin-top: 10px; color: #cbd5e1;">Termos de Uso | Política de Privacidade | Suporte</p>
+        </footer>
+    </div>
 
 </body>
 </html>
