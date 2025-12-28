@@ -14,10 +14,10 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 
     <style>
-        /* --- RESET & VARIÁVEIS (Cores do Quiz Anterior) --- */
+        /* --- RESET & VARIÁVEIS --- */
         :root {
-            --primary-orange: #ea580c; /* Laranja para ação */
-            --navy-deep: #0f172a; /* Azul autoridade */
+            --primary-orange: #ea580c; 
+            --navy-deep: #0f172a; 
             --blue-accent: #3b82f6;
             --dark-text: #1e293b;
             --light-text: #475569;
@@ -150,7 +150,15 @@
             width: 100%;
         }
         .nav-links { display: none; gap: 20px; font-size: 0.85rem; text-transform: uppercase; font-weight: 600; color: var(--navy-deep); }
-        .logo { font-size: 1.3rem; color: var(--navy-deep); font-weight: 800; letter-spacing: -0.5px; text-transform: uppercase;}
+        
+        /* AJUSTE LOGO: Tamanho reduzido */
+        .logo { 
+            font-size: 1.1rem; /* Reduzido de 1.3rem */
+            color: var(--navy-deep); 
+            font-weight: 800; 
+            letter-spacing: -0.5px; 
+            text-transform: uppercase;
+        }
         .logo span { color: var(--primary-orange); font-weight: 800; }
         .header-icons { display: flex; gap: 15px; font-size: 1.1rem; color: var(--navy-deep); }
 
@@ -169,7 +177,7 @@
             align-items: center;
             padding: 20px;
         }
-        /* VISUAL DE APP/DASHBOARD */
+        
         .book-cover {
             width: 280px;
             height: 400px;
@@ -182,7 +190,7 @@
             text-align: center;
             box-shadow: 20px 20px 40px rgba(0,0,0,0.2);
             padding: 25px;
-            border-radius: 20px; /* Bordas arredondadas estilo App */
+            border-radius: 20px; 
             border: 4px solid #334155;
             position: relative;
         }
@@ -214,14 +222,17 @@
         .app-icon { font-size: 3rem; color: var(--blue-accent); margin-bottom: 10px; }
         .author { font-size: 0.7rem; letter-spacing: 1px; text-transform: uppercase; margin-top: auto; color: #94a3b8; font-weight: 600; }
         
+        /* AJUSTE TÍTULO PRINCIPAL: Fonte Serifada igual ao print */
         .product-details h1 { 
-            font-family: var(--font-main); 
-            font-weight: 800;
-            font-size: 2.2rem; 
-            line-height: 1.2; 
+            font-family: var(--font-serif); /* Alterado para Serif (Playfair Display) */
+            font-weight: 700;
+            font-size: 2.6rem; 
+            line-height: 1.1; 
             margin-bottom: 15px; 
             color: var(--navy-deep); 
+            letter-spacing: -1px; /* Letras mais juntas como no estilo editorial */
         }
+
         .stars { color: var(--gold); margin-bottom: 10px; font-size: 1rem; }
         
         .price-container { margin: 20px 0; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
@@ -466,7 +477,7 @@
         @media (max-width: 768px) {
             .container { padding: 30px 20px; }
             
-            .product-details h1 { font-size: 1.8rem; line-height: 1.3; } 
+            .product-details h1 { font-size: 2.2rem; line-height: 1.1; } 
             h2 { font-size: 1.5rem !important; line-height: 1.3; }
             
             .product-hero, .comparison-section, .experience-section, .game-section, .reviews-grid {
@@ -499,7 +510,7 @@
         }
 
         @media (max-width: 480px) {
-            .product-details h1 { font-size: 1.6rem; }
+            .product-details h1 { font-size: 1.8rem; }
             h2 { font-size: 1.35rem !important; }
             .top-bar { font-size: 0.75rem; }
             .btn-cta { font-size: 0.9rem; padding: 14px; }
@@ -510,7 +521,8 @@
 <body>
 
     <div class="top-bar">
-        <span>OFERTA RELÂMPAGO ⚡ EBOOK + APP</span>
+        <span>OFERTA RELÂMPAGO ⚡ EBOOK + APP COM DIAGNÓSTICO INCLUSO</span>
+        <div class="timer">00 : 45 : 12</div>
     </div>
 
     <header>
